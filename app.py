@@ -5,7 +5,7 @@ import requests
 from datetime import datetime
 
 # ========== ТВОИ НАСТРОЙКИ ==========
-BOT_TOKEN = "8514251161:AFAHwx9cETJBoHeAX-v_PBpPEXWJCRrC6s"
+BOT_TOKEN = "8514251161:AAFAHwx9cETJBoHeAX-v_PBpPEXWJCRrC6s"
 CHAT_ID = "ТВОЙ_CHAT_ID"          # Сюда вставим ID позже
 
 TIMEFRAME = "30m"
@@ -126,7 +126,7 @@ f"{signal['symbol']}\n"
         print(f"😴 Сплю {MAIN_CYCLE_DELAY // 60} мин...")
         time.sleep(MAIN_CYCLE_DELAY)
 
-if name == "main":
+if__name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:

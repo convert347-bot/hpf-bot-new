@@ -4,7 +4,7 @@ import time
 import requests
 from datetime import datetime
 
-BOT_TOKEN = "8514251161:AAFAHwx9cETJBoHeAX-v_PBpPEXWJCRrC6s"
+BOT_TOKEN = "8514251161:AAHouiVoNirkwkgG64j4s147HVgAoQFaIvw"
 CHAT_ID = "5916071793"
 TIMEFRAME = "30m"
 MIN_BARS = 6

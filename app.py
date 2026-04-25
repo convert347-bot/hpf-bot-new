@@ -9,8 +9,8 @@ BOT_TOKEN = "8514251161:AAHouiVoNirkwkgG64js147HVgAoQFalvw"
 CHAT_ID = "5916071793"
 
 TIMEFRAME = "30m"
-LIMIT = 50                      # смотрим последние 50 свечей (25 часов)
-BATCH_SIZE = 40                 # обрабатываем по 40 монет за раз
+LIMIT = 30                      # смотрим последние 50 свечей (25 часов)
+BATCH_SIZE = 20                 # обрабатываем по 40 монет за раз
 DELAY_BETWEEN_BATCHES = 30
 MAIN_CYCLE_DELAY = 900          # 15 минут между циклами
 

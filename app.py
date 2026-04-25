@@ -3,6 +3,8 @@ import pandas as pd
 import time
 import requests
 from datetime import datetime
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
 
 # ========== НАСТРОЙКИ ==========
 BOT_TOKEN = "8514251161:AAHouiVoNirkwkgG64js147HVgAoQFalvw"
@@ -17,7 +19,6 @@ MAIN_CYCLE_DELAY = 1200
 FIB_LEVELS = [0.382, 0.5, 0.618, 0.707, 0.786, 0.886]
 FIB_TOLERANCE = 0.1
 
-# Стоп-лист (исключаем всё, кроме крипты)
 BLOCKLIST = [
     'OIL', 'GAS', 'GOLD', 'SILVER', 'COPPER', 'URAN', 'PLAT', 'PALL',
     'NASDAQ', 'SPX', 'RUSSELL', 'DOW', 'FTSE', 'DAX', 'NIKKEI', 'HSI',
@@ -25,6 +26,20 @@ BLOCKLIST = [
     'MSTR', 'JPM', 'BABA', 'NFLX', 'AMD', 'INTL', 'C', 'WMT', 'JNJ', 'V', 'PG'
 ]
 # ================================
+
+# --- Микро-веб-сервер для health check ---
+class HealthHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'OK')
+
+def run_health_server():
+    server = HTTPServer(('0.0.0.0', 8000), HealthHandler)
+    server.serve_forever()
+
+threading.Thread(target=run_health_server, daemon=True).start()
+# -----------------------------------------
 
 def send_telegram(msg):
     try:
@@ -116,7 +131,7 @@ def find_c(symbol):
         return None
 
 def main():
-    print("✅ Бот запущен (крипто-фьючерсы + Фибоначчи, щадящий режим). Ищу точки C...")
+    print("✅ Бот запущен (крипто-фьючерсы + Фибоначчи + health check). Ищу точки C...")
     send_telegram("✅ Бот запущен. Ищу точки C...")
     all_pairs = get_crypto_symbols()
     print(f"Загружено крипто-пар: {len(all_pairs)}")
